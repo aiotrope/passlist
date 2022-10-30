@@ -1,6 +1,9 @@
-import { useRef, useState } from "react";
-import { Togglable } from "./Togglable";
-import blogService from "../services/blogs";
+/* eslint-disable */
+import { useRef, useState } from 'react'
+import { Togglable } from './Togglable'
+import blogService from '../services/blogs'
+
+import PropTypes from 'prop-types'
 
 export const Blog = ({
   blog,
@@ -9,74 +12,74 @@ export const Blog = ({
   setCounter,
   isComponentMounted,
 }) => {
-  const [like, setLike] = useState(blog.likes);
+  const [like, setLike] = useState(blog.likes)
 
-  const blogContentRef = useRef();
+  const blogContentRef = useRef()
 
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
-    border: "solid",
+    border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
-  };
+  }
 
   const addLike = async () => {
     try {
-      setLike(blog.likes + 1);
+      setLike(blog.likes + 1)
       const response = await blogService.update(blog.id, {
         likes: blog.likes + 1,
-      });
+      })
       if (response && isComponentMounted) {
         setSuccessMessage(
           `You like the blog ${response.data.title} by ${response.data.author} with ${response.data.likes} likes!`
-        );
-        setCounter((counter) => counter + 1);
-        let timer;
-        clearTimeout(timer);
+        )
+        setCounter((counter) => counter + 1)
+        let timer
+        clearTimeout(timer)
         timer = setTimeout(() => {
-          setSuccessMessage(null);
-        }, 1000);
+          setSuccessMessage(null)
+        }, 1000)
       }
     } catch (error) {
-      console.error(error);
-      setErrorMessage(error.response.data?.error);
-      let timer;
-      clearTimeout(timer);
+      console.error(error)
+      setErrorMessage(error.response.data.error)
+      let timer
+      clearTimeout(timer)
       timer = setTimeout(() => {
-        setErrorMessage(null);
-        window.location.reload();
-      }, 3000);
+        setErrorMessage(null)
+        window.location.reload()
+      }, 3000)
     }
-  };
+  }
 
   const deleteBlog = async (event) => {
     try {
       const confirm = window.confirm(
         `Remove blog ${blog.title} by ${blog.author}`
-      );
+      )
       if (confirm) {
-        const response = await blogService.remove(event.target.value);
+        const response = await blogService.remove(event.target.value)
         if (response.status === 200 && isComponentMounted) {
-          setSuccessMessage(response.data.message);
-          let timer;
-          clearTimeout(timer);
+          setSuccessMessage(response.data.message)
+          let timer
+          clearTimeout(timer)
           timer = setTimeout(() => {
-            setSuccessMessage(null);
-            window.location.reload();
-          }, 1000);
+            setSuccessMessage(null)
+            window.location.reload()
+          }, 1000)
         }
       }
     } catch (error) {
-      setErrorMessage(error.response.data.error);
-      let timer;
-      clearTimeout(timer);
+      setErrorMessage(error.response.data.error)
+      let timer
+      clearTimeout(timer)
       timer = setTimeout(() => {
-        setErrorMessage(null);
-        window.location.reload();
-      }, 3000);
+        setErrorMessage(null)
+        window.location.reload()
+      }, 3000)
     }
-  };
+  }
 
   return (
     <div style={blogStyle}>
@@ -90,12 +93,13 @@ export const Blog = ({
               like
             </button>
           </div>
-          {blog.user?.map((u, i) => {
+
+          {blog?.user?.map((u, i) => {
             return (
               <div key={i}>
                 <div key={u.id}>{u.name}</div>
               </div>
-            );
+            )
           })}
           <div>
             <button value={blog.id} onClick={deleteBlog}>
@@ -105,5 +109,15 @@ export const Blog = ({
         </Togglable>
       </div>
     </div>
-  );
-};
+  )
+
+}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  setSuccessMessage: PropTypes.func.isRequired,
+  setErrorMessage:  PropTypes.func.isRequired,
+  setCounter:  PropTypes.func.isRequired,
+  isComponentMounted:  PropTypes.object.isRequired,
+}
+

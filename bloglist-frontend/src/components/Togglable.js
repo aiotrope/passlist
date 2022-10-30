@@ -1,15 +1,16 @@
-import { useState, forwardRef, useImperativeHandle } from "react";
+import { useState, forwardRef, useImperativeHandle } from 'react'
+import PropTypes from 'prop-types'
 
 export const Togglable = forwardRef((props, ref) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
 
-  const hideWhenVisible = { display: visible ? "none" : "" };
+  const hideWhenVisible = { display: visible ? 'none' : '' }
 
-  const showWhenVisible = { display: visible ? "" : "none" };
+  const showWhenVisible = { display: visible ? '' : 'none' }
 
   const toggleVisibility = () => {
-    setVisible(!visible);
-  };
+    setVisible(!visible)
+  }
 
   const toggleBlogCreateForm = () => (
     <>
@@ -21,13 +22,13 @@ export const Togglable = forwardRef((props, ref) => {
         <button onClick={toggleVisibility}>{props.close}</button>
       </span>
     </>
-  );
+  )
 
   useImperativeHandle(ref, () => {
     return {
       toggleVisibility,
-    };
-  });
+    }
+  })
 
   const toggleBlogContent = () => (
     <span>
@@ -39,11 +40,19 @@ export const Togglable = forwardRef((props, ref) => {
         {props.children}
       </span>
     </span>
-  );
+  )
 
-  const buttonLabel = props.buttonLabel;
+  const buttonLabel = props.buttonLabel
 
-  return buttonLabel === "create new blog"
+
+
+  return buttonLabel === 'create new blog'
     ? toggleBlogCreateForm()
-    : toggleBlogContent();
-});
+    : toggleBlogContent()
+})
+
+Togglable.displayName = 'Togglable'
+
+Togglable.propTypes = {
+  buttonLabel: PropTypes.string.isRequired
+}
