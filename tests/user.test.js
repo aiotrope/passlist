@@ -353,9 +353,15 @@ describe('GET blogs - unit test for get request @ /api/blogs with default 1 blog
   })
 
   test('it renders all blogs owned by registered users', async () => {
+    const userTwo = await User.findOne({ username: 'username2' })
+    const token2 = jwt.sign(
+      { username: userTwo.username, id: userTwo._id },
+      config.jwt_key,
+      { expiresIn: '1h' }
+    )
     const response = await request(app)
       .get('/api/blogs')
-      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token2}`)
 
     expect(response.type).toEqual('application/json')
     expect(response.statusCode).toEqual(200)

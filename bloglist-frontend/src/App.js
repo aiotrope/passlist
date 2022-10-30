@@ -40,7 +40,7 @@ const App = () => {
         }
       } catch (error) {
         console.error(error)
-        setErrorMessage(error.response.data.error)
+        setErrorMessage(error.message)
         let timer
         clearTimeout(timer)
         timer = setTimeout(() => {

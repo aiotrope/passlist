@@ -110,6 +110,8 @@ const errorHandler = (error, req, res, next) => {
     'only the user who created this blog has the option to delete it!'
   ) {
     return res.status(403).json({ error: error.message })
+  } else if (error.message === 'there were no blog found!') {
+    return res.status(404).json({ error: error.message })
   }
 
   next(error)

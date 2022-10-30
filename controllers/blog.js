@@ -42,6 +42,7 @@ router.post('/', async (req, res) => {
     await currentUser.save()
 
     const response = {
+      id: newBlog.id,
       title: newBlog.title,
       author: newBlog.author,
       url: newBlog.url,
@@ -71,13 +72,18 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
+
+  jwt.verify(req.token, config.jwt_key)
+
+  const user = req.user
+
   const id = req.params.id
 
   const blog = await Blog.findById(id)
 
-  if (blog) {
+  if (blog && user) {
     res.status(200).json(blog)
-  } else if (!blog) {
+  } else if (!blog && user) {
     throw Error('there were no blog found!')
   }
 })
@@ -109,6 +115,8 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.patch('/:id', async (req, res) => {
+  jwt.verify(req.token, config.jwt_key)
+
   const id = req.params.id
 
   const blog = await Blog.findById(id)
