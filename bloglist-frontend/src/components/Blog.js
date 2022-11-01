@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 import { useRef, useState } from 'react'
 import { Togglable } from './Togglable'
 import blogService from '../services/blogs'
@@ -84,12 +84,13 @@ export const Blog = ({
   return (
     <div style={blogStyle}>
       <div key={blog.id}>
-        {blog.title} {blog.author}
+        <span className="blog-title">{blog.title}</span>{' '}
+        <span className="blog-author"> {blog.author}</span>
         <Togglable buttonLabel="view" close="hide" ref={blogContentRef}>
-          <div>{blog.url}</div>
+          <div><span className="blog-url" data-testid="url">{blog.url}</span></div>
           <div>
-            likes {like}
-            <button value={blog.likes} onClick={addLike}>
+            likes <span className="blog-likes" data-testid="likes">{like}</span>
+            <button value={blog.likes} className="addLike" data-testid="addLike" onClick={addLike}>
               like
             </button>
           </div>
@@ -110,14 +111,12 @@ export const Blog = ({
       </div>
     </div>
   )
-
 }
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  setSuccessMessage: PropTypes.func.isRequired,
-  setErrorMessage:  PropTypes.func.isRequired,
-  setCounter:  PropTypes.func.isRequired,
-  isComponentMounted:  PropTypes.object.isRequired,
+  setSuccessMessage: PropTypes.func,
+  setErrorMessage: PropTypes.func,
+  setCounter: PropTypes.func,
+  isComponentMounted: PropTypes.object.isRequired,
 }
-

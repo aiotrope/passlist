@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Blog } from './components/Blog'
 import blogService from './services/blogs'
 import { LoginForm } from './components/LoginForm'
-import { BlogCreationForm } from './components/BlogCreationForm'
+import { BlogForm } from './components/BlogForm'
 import { Notification } from './components/Notification'
 import { Togglable } from './components/Togglable'
 
@@ -90,7 +90,7 @@ const App = () => {
   }
 
   const loginRelatedComponent = () => (
-    <div>
+    <div className='main'>
       <Notification error={errorMessage} success={successMessage} />
       <LoginForm
         user={user}
@@ -114,14 +114,14 @@ const App = () => {
       ref={blogCreationFormRef}
     >
       <h2>create new</h2>
-      <BlogCreationForm createBlog={addBlog} />
+      <BlogForm createBlog={addBlog} />
     </Togglable>
   )
 
   const blogsDescByLikes = blogs.sort((a, b) => b.likes - a.likes)
 
   const blogRelatedComponent = () => (
-    <div>
+    <div className='main'>
       <h2>blogs</h2>
       <Notification error={errorMessage} success={successMessage} />
 
@@ -148,3 +148,4 @@ const App = () => {
 }
 
 export default App
+

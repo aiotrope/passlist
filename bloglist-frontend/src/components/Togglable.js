@@ -33,10 +33,10 @@ export const Togglable = forwardRef((props, ref) => {
   const toggleBlogContent = () => (
     <span>
       <span style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+        <button onClick={toggleVisibility} className="view" data-testid="view">{props.buttonLabel}</button>
       </span>
       <span style={showWhenVisible}>
-        <button onClick={toggleVisibility}>{props.close}</button>
+        <button onClick={toggleVisibility} data-testid="hide">{props.close}</button>
         {props.children}
       </span>
     </span>

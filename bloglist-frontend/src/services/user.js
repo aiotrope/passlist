@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-empty */
+/* eslint-disable no-undef */
 import axios from 'axios'
 
 const baseUrl = process.env.REACT_APP_BASE_URL

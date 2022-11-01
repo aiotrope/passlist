@@ -1,7 +1,5 @@
 # passlist
 
-Maintainer: [Arnel Imperial](https://github.com/aiotrope/)
-
 Date: 24.10.2022
 
 ## Part5: Testing React apps
@@ -10,4 +8,6 @@ Date: 24.10.2022
 
 #### Branches
 
-- [Solution for Exercise 5.1 - 5.10](https://github.com/aiotrope/passlist/tree/5.5)
+- [Solution for Exercise 5.1 - 5.12](https://github.com/aiotrope/passlist/tree/5.11)
+
+- [Solution for Exercise 5.13 - 5.16](https://github.com/aiotrope/passlist/tree/5.13)
