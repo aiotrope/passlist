@@ -31,7 +31,7 @@ export const LoginForm = ({
         clearTimeout(timer)
         timer = setTimeout(() => {
           setSuccessMessage(null)
-        }, 2000)
+        }, 5000)
       }
     } catch (error) {
       setErrorMessage('invalid username or password!')
@@ -57,6 +57,8 @@ export const LoginForm = ({
           <input
             type="text"
             value={username}
+            id="_username"
+            name="username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </label>
@@ -66,12 +68,16 @@ export const LoginForm = ({
             <input
               type="text"
               value={password}
+              id="_password"
+              name="password"
               onChange={({ target }) => setPassword(target.value)}
             />
           </label>
         </div>
 
-        <button type="submit">login</button>
+        <button type="submit" id="login-btn">
+          login
+        </button>
       </form>
     </div>
   )

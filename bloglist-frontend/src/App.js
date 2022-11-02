@@ -90,8 +90,9 @@ const App = () => {
   }
 
   const loginRelatedComponent = () => (
-    <div className='main'>
+    <div className="main">
       <Notification error={errorMessage} success={successMessage} />
+
       <LoginForm
         user={user}
         setUser={setUser}
@@ -121,12 +122,15 @@ const App = () => {
   const blogsDescByLikes = blogs.sort((a, b) => b.likes - a.likes)
 
   const blogRelatedComponent = () => (
-    <div className='main'>
+    <div className="main">
       <h2>blogs</h2>
       <Notification error={errorMessage} success={successMessage} />
 
       <p>
-        {user.name} logged in <button onClick={handleLogout}>logout</button>
+        {user.name} logged in{' '}
+        <button data-testid="logoutBtn" onClick={handleLogout}>
+          logout
+        </button>
       </p>
 
       <div>{blogCreationFormComponent()}</div>
@@ -148,4 +152,3 @@ const App = () => {
 }
 
 export default App
-

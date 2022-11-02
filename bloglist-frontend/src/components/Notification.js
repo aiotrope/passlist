@@ -8,9 +8,17 @@ export const Notification = ({ error, success }) => {
   } else if (success === null) {
     return null
   } else if (success) {
-    return <div className="success">{success}</div>
+    return (
+      <div className="success" data-testid="success-msg">
+        {success}
+      </div>
+    )
   } else if (error) {
-    return <div className="error">{error}</div>
+    return (
+      <div className="error" data-testid="error-msg">
+        {error}
+      </div>
+    )
   } else {
     return null
   }

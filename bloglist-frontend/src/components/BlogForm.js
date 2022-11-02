@@ -56,16 +56,13 @@ export const BlogForm = ({ createBlog }) => {
       <div>
         <label htmlFor="url">
           url:
-          <input
-            type="text"
-            value={url}
-            id="url"
-            onChange={handleChangUrl}
-          />
+          <input type="text" value={url} id="url" onChange={handleChangUrl} />
         </label>
       </div>
 
-      <button type="submit" id="create">create</button>
+      <button type="submit" id="create">
+        create
+      </button>
     </form>
   )
 }

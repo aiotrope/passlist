@@ -1,4 +1,3 @@
-
 import { useRef, useState } from 'react'
 import { Togglable } from './Togglable'
 import blogService from '../services/blogs'
@@ -82,15 +81,27 @@ export const Blog = ({
   }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} data-testid="blog">
       <div key={blog.id}>
-        <span className="blog-title">{blog.title}</span>{' '}
+        <span className="blog-title">{blog.title}</span>
         <span className="blog-author"> {blog.author}</span>
         <Togglable buttonLabel="view" close="hide" ref={blogContentRef}>
-          <div><span className="blog-url" data-testid="url">{blog.url}</span></div>
           <div>
-            likes <span className="blog-likes" data-testid="likes">{like}</span>
-            <button value={blog.likes} className="addLike" data-testid="addLike" onClick={addLike}>
+            <span className="blog-url" data-testid="url">
+              {blog.url}
+            </span>
+          </div>
+          <div>
+            likes{' '}
+            <span className="blog-likes" data-testid="likes" id="_likes">
+              {like}
+            </span>
+            <button
+              value={blog.likes}
+              className="addLike"
+              data-testid="addLike"
+              onClick={addLike}
+            >
               like
             </button>
           </div>
@@ -103,7 +114,11 @@ export const Blog = ({
             )
           })}
           <div>
-            <button value={blog.id} onClick={deleteBlog}>
+            <button
+              value={blog.id}
+              data-testid="removeBtn"
+              onClick={deleteBlog}
+            >
               remove
             </button>
           </div>

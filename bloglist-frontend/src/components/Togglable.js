@@ -15,7 +15,9 @@ export const Togglable = forwardRef((props, ref) => {
   const toggleBlogCreateForm = () => (
     <>
       <span style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+        <button onClick={toggleVisibility} data-testid="_createBlogBtn">
+          {props.buttonLabel}
+        </button>
       </span>
       <span style={showWhenVisible}>
         {props.children}
@@ -33,18 +35,20 @@ export const Togglable = forwardRef((props, ref) => {
   const toggleBlogContent = () => (
     <span>
       <span style={hideWhenVisible}>
-        <button onClick={toggleVisibility} className="view" data-testid="view">{props.buttonLabel}</button>
+        <button onClick={toggleVisibility} className="view" data-testid="view">
+          {props.buttonLabel}
+        </button>
       </span>
       <span style={showWhenVisible}>
-        <button onClick={toggleVisibility} data-testid="hide">{props.close}</button>
+        <button onClick={toggleVisibility} data-testid="hide">
+          {props.close}
+        </button>
         {props.children}
       </span>
     </span>
   )
 
   const buttonLabel = props.buttonLabel
-
-
 
   return buttonLabel === 'create new blog'
     ? toggleBlogCreateForm()
@@ -54,5 +58,5 @@ export const Togglable = forwardRef((props, ref) => {
 Togglable.displayName = 'Togglable'
 
 Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
+  buttonLabel: PropTypes.string.isRequired,
 }

@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 const opts = {
   autoIndex: true,
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 }
 
 mongoose.connect(dbURL, opts)
@@ -63,12 +63,15 @@ app.use('/api/blogs', tokenExtractor, userExtractor, blogRouter)
 
 app.use('/api/users', userRouter)
 
-
 app.use('/api/login', loginRouter)
+
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('./controllers/testing')
+  app.use('/api/testing', testingRouter)
+}
 
 app.use(middleware.endPoint404)
 
 app.use(middleware.errorHandler)
-
 
 module.exports = app
